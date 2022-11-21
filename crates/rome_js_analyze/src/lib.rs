@@ -167,7 +167,7 @@ mod tests {
                     }
                     let error = diag.with_file_path("ahahah").with_file_source_code(SOURCE);
                     let text = markup_to_string(markup! {
-                        {PrintDiagnostic(&error, true)}
+                        {PrintDiagnostic::verbose(&error)}
                     });
                     eprintln!("{text}");
                 }

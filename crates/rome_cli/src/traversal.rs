@@ -419,7 +419,7 @@ fn process_messages(options: ProcessMessagesOptions) {
                 if mode.should_report_to_terminal() {
                     if should_print {
                         console.error(markup! {
-                            {PrintDiagnostic(&err, verbose)}
+                            {if verbose { PrintDiagnostic::verbose(&err) } else { PrintDiagnostic::simple(&err) }}
                         });
                     }
                 } else {
@@ -466,7 +466,7 @@ fn process_messages(options: ProcessMessagesOptions) {
 
                         let diag = diag.with_file_path(&name).with_file_source_code(&content);
                         console.error(markup! {
-                            {PrintDiagnostic(&diag, verbose)}
+                            {if verbose { PrintDiagnostic::verbose(&diag) } else { PrintDiagnostic::simple(&diag) }}
                         });
                     }
                 } else {
@@ -492,7 +492,7 @@ fn process_messages(options: ProcessMessagesOptions) {
                                 let diag =
                                     diag.with_file_path(&name).with_file_source_code(&content);
                                 console.error(markup! {
-                                    {PrintDiagnostic(&diag, verbose)}
+                                    {if verbose { PrintDiagnostic::verbose(&diag) } else { PrintDiagnostic::simple(&diag) }}
                                 });
                             }
                         } else {
@@ -542,7 +542,7 @@ fn process_messages(options: ProcessMessagesOptions) {
                             };
 
                             console.error(markup! {
-                                {PrintDiagnostic(&diag, verbose)}
+                                {if verbose { PrintDiagnostic::verbose(&diag) } else { PrintDiagnostic::simple(&diag) }}
                             });
                         } else {
                             let diag = FormatDiffDiagnostic {
@@ -554,7 +554,7 @@ fn process_messages(options: ProcessMessagesOptions) {
                             };
 
                             console.error(markup! {
-                                {PrintDiagnostic(&diag, verbose)}
+                                {if verbose { PrintDiagnostic::verbose(&diag) } else { PrintDiagnostic::simple(&diag) }}
                             });
                         }
                     }
